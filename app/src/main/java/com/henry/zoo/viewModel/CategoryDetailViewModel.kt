@@ -41,11 +41,11 @@ class CategoryDetailViewModel(): ViewModel() {
                         memo.postValue(it.E_Memo)
                         category.postValue(it.E_Category)
                         url.postValue(it.E_URL)
-                        GetPlantListTask(object : DatabaseTaskPostExecute<List<Plant>> {
-                            override fun onCallback(result: List<Plant>?) {
+                        GetPlantListTask(object : DatabaseTaskPostExecute<ArrayList<Plant>> {
+                            override fun onCallback(result: ArrayList<Plant>?) {
                                 result?.run {
-//                                    val header = Plant(photoUrl = it.E_Pic_URL, info = it.E_Info, memo = it.E_Memo, category = it.E_Category, url = it.E_URL)
-//                                    this.add(0, header)
+                                    val header = Plant(photoUrl = it.E_Pic_URL, info = it.E_Info, memo = it.E_Memo, category = it.E_Category, eUrl = it.E_URL)
+                                    this.add(0, header)
                                     plantList.postValue(this)
                                 }
                             }

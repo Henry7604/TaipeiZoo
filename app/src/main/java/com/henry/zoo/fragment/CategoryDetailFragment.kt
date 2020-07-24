@@ -25,6 +25,8 @@ import com.henry.zoo.database.enity.Plant
 import com.henry.zoo.databinding.FragmentCategoryDetailBinding
 import com.henry.zoo.adapter.AdapterInterface
 import com.henry.zoo.adapter.BaseRecyclerViewAdapter
+import com.henry.zoo.adapter.CategoryDetailAdapter
+import com.henry.zoo.adapter.ItemListener
 import com.henry.zoo.viewModel.CategoryDetailViewModel
 import com.henry.zoo.viewModel.MainViewModel
 
@@ -44,8 +46,6 @@ class CategoryDetailFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_category_detail, container, false)
         mBinding = DataBindingUtil.bind(rootView)!!
-
-        Log.d("henryyy", "create view")
 
         mBinding?.let {
             it.viewModel = mViewModel
@@ -74,46 +74,25 @@ class CategoryDetailFragment : Fragment() {
             if (it.isNotEmpty()) {
                 mBinding?.run {
                     if (this.rvPlant.adapter == null) {
-                        val adapter =
-                            BaseRecyclerViewAdapter(
-                                R.layout.item_plant,
-                                object :
-                                    AdapterInterface<Plant> {
-                                    override fun bindData(binding: ViewDataBinding, data: Plant) {
-                                        binding.setVariable(BR.model, data)
-                                    }
-
-                                    override fun onItemClick(data: Plant) {
-                                        val navController =
-                                            NavHostFragment.findNavController(this@CategoryDetailFragment)
-                                        val action =
-                                            CategoryDetailFragmentDirections.actionPlantDetail(data.F_Name_Ch)
-                                        navController.navigate(action)
-                                    }
-                                })
+                        val adapter = CategoryDetailAdapter(object : ItemListener<Plant> {
+                            override fun onItemClick(data: Plant) {
+                                if (data.eUrl.isNotEmpty()) {
+                                    val intent = Intent()
+                                    intent.action = Intent.ACTION_VIEW
+                                    intent.data = Uri.parse(data.eUrl)
+                                    startActivity(intent)
+                                } else {
+                                    val navController =
+                                        NavHostFragment.findNavController(this@CategoryDetailFragment)
+                                    val action =
+                                        CategoryDetailFragmentDirections.actionPlantDetail(data.F_Name_Ch)
+                                    navController.navigate(action)
+                                }
+                            }
+                        })
                         adapter.addList(it)
                         this.rvPlant.adapter = adapter
                     }
-                }
-            }
-        })
-
-        mViewModel.url.observe(viewLifecycleOwner, Observer { it ->
-            if (it.isNotEmpty()) {
-                val openUrl = getString(R.string.open_browser)
-                val spannableString = SpannableString(openUrl)
-                spannableString.setSpan(object : ClickableSpan() {
-                    override fun onClick(widget: View) {
-                        var intent = Intent()
-                        intent.action = Intent.ACTION_VIEW
-                        intent.data = Uri.parse(it)
-                        startActivity(intent)
-                    }
-                }, 0, openUrl.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-                mBinding?.let {
-                    it.tvOpenUrl.text = spannableString
-                    it.tvOpenUrl.movementMethod = LinkMovementMethod.getInstance()
                 }
             }
         })
