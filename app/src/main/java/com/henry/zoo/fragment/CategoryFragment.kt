@@ -50,39 +50,7 @@ class CategoryFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        GetZooListTask(object : DatabaseTaskPostExecute<List<Zoo>> {
-            override fun onCallback(result: List<Zoo>?) {
-                result?.run {
-                    if (this.isNotEmpty()) {
-                        mViewModel.list.postValue(this)
-                    } else {
-                        val zooFileName = "zoo.txt"
-                        val zooContract = activity!!.application.assets.open(zooFileName).bufferedReader().use {
-                            it.readText()
-                        }
-                        val zooType = KUtils.getTypeToken<List<Zoo>>()
-                        val zooGson = Gson()
-                        val zooList = zooGson.fromJson<List<Zoo>>(zooContract, zooType)
-
-                        val plantFileName = "plant.txt"
-                        val plantContract = activity!!.application.assets.open(plantFileName).bufferedReader().use {
-                            it.readText()
-                        }
-                        val plantType = KUtils.getTypeToken<List<Plant>>()
-                        val plantGson = Gson()
-                        val plantList = plantGson.fromJson<List<Plant>>(plantContract, plantType)
-
-                        InsertZooTask(object : DatabaseTaskPostExecute<Boolean> {
-                            override fun onCallback(result: Boolean?) {
-                                mViewModel.list.postValue(zooList)
-                            }
-                        }).execute(zooList)
-                        InsertPlantTask().execute(plantList)
-                    }
-                }
-
-            }
-        }).execute()
+        mViewModel.getZoo()
 
         mViewModel.list.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) {

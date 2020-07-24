@@ -32,5 +32,11 @@ class ResourceProvider private constructor(context: Context) {
         fun getString(resId: Int, value: String): String {
             return mContext.getString(resId, value)
         }
+
+        fun getAssets(fileName: String): String {
+            return mContext.assets.open(fileName).bufferedReader().use {
+                it.readText()
+            }
+        }
     }
 }
