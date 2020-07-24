@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Taipei Zoo</string>
+    <string name="home_title">臺北市立動物園</string>
+    <string name="memo_empty">無休館資訊</string>
+    <string name="open_browser">在網頁開啟</string>
+    <string name="plant">植物資料</string>
+    <string name="also_known">別名</string>
+    <string name="brief">簡介</string>
+    <string name="feature">辨認方式</string>
+    <string name="function">功能性</string>
+    <string name="update">最後更新:%1$s</string>
+</resources>

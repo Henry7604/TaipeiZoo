@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_zoo"
+    app:startDestination="@id/fragment_category">
+
+    <fragment
+        android:id="@+id/fragment_category"
+        android:name="com.henry.zoo.fragment.CategoryFragment"
+        tools:layout="@layout/fragment_category">
+
+        <action
+            android:id="@+id/action_category_detail"
+            app:destination="@id/fragment_category_detail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_category_detail"
+        android:name="com.henry.zoo.fragment.CategoryDetailFragment"
+        tools:layout="@layout/fragment_category_detail"
+        android:label="e_name">
+
+        <argument
+            android:name="e_name"
+            app:argType="string"/>
+
+        <argument
+            android:name="e_no"
+            app:argType="integer"/>
+
+        <action
+            android:id="@+id/action_plant_detail"
+            app:destination="@id/fragment_plant_detail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_plant_detail"
+        android:name="com.henry.zoo.fragment.PlantDetailFragment"
+        tools:layout="@layout/fragment_plant_detail">
+
+        <argument
+            android:name="name"
+            app:argType="string"/>
+
+    </fragment>
+
+</navigation>
