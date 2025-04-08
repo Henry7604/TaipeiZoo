@@ -14,6 +14,7 @@ import com.example.taipeizoo.DialogUtility
 import com.example.taipeizoo.R
 import com.example.taipeizoo.databinding.FragmentPlantBinding
 import com.example.taipeizoo.fragment.adapter.PlantAdapter
+import com.example.taipeizoo.toHalfWidth
 import com.example.taipeizoo.viewModel.PlantViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -54,7 +55,7 @@ class PlantFragment : BaseFragment<FragmentPlantBinding>() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mViewModel.allPlantsPagingFlow.collectLatest { pagingData ->
-                    mAdapter.submitData(pagingData.filter { it.location.contains(mName) })
+                    mAdapter.submitData(pagingData.filter { it.location.toHalfWidth().contains(mName.toHalfWidth()) })
                 }
             }
         }

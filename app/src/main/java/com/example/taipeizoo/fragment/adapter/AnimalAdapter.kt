@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.example.taipeizoo.R
 import com.example.taipeizoo.databinding.ItemInfoBinding
 import com.example.taipeizoo.fragment.InfoBottomSheetFragment
-import com.example.taipeizoo.fragment.adapter.PlantAdapter.PlantViewHolder
 import com.example.taipeizoo.network.model.Animal
 import com.example.taipeizoo.replaceHttp
 

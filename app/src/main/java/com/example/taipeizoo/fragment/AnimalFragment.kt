@@ -14,6 +14,7 @@ import com.example.taipeizoo.DialogUtility
 import com.example.taipeizoo.R
 import com.example.taipeizoo.databinding.FragmentAnimalBinding
 import com.example.taipeizoo.fragment.adapter.AnimalAdapter
+import com.example.taipeizoo.toHalfWidth
 import com.example.taipeizoo.viewModel.AnimalViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -55,7 +56,7 @@ class AnimalFragment : BaseFragment<FragmentAnimalBinding>() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mViewModel.allAnimalsPagingFlow.collectLatest { pagingData ->
-                    mAdapter.submitData(pagingData.filter { it.location.contains(mName) })
+                    mAdapter.submitData(pagingData.filter { it.location.toHalfWidth().contains(mName.toHalfWidth()) })
                 }
             }
         }
