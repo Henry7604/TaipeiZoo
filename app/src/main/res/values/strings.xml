@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">TaipeiZoo</string>
+
+    <string name="open_link">在網頁開啟</string>
+    <string name="animal_data">動物資料</string>
+    <string name="plant_data">植物資料</string>
+    <string name="memo_empty">無休館資訊</string>
+    <string name="no_animal_data">%1$s無動物資料</string>
+    <string name="no_plant_data">%1$s無植物資料</string>
+    <string name="also_known">別名</string>
+    <string name="phylum">分類</string>
+    <string name="distribution">分佈</string>
+    <string name="feature">特徵</string>
+    <string name="behavior">習性</string>
+    <string name="last_update">最後更新:%s</string>
+    <string name="brief">簡介</string>
+    <string name="plant_feature">辨認方式</string>
+    <string name="function_application">功能性</string>
+    <string name="park_intro">館區簡介</string>
+    <string name="all_animal">所有動物</string>
+    <string name="all_plant">所有植物</string>
+    <string name="api_error_title">取得資料失敗</string>
+    <string name="api_error_msg">請稍後再重試一次</string>
+    <string name="network_error_title">無網路連線</string>
+    <string name="network_error_msg">請檢查網路連線後再試一次</string>
+    <string name="cancel">取消</string>
+    <string name="retry">重試</string>
+</resources>
